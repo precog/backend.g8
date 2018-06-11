@@ -25,9 +25,11 @@ $ travis enable -r slamdata/foo-bar
 Once this is done, the only remaining step is to [`travis encrypt`](https://docs.travis-ci.com/user/encryption-keys/#Usage) the following variables and add them to the `env.global` section of the `.travis.yml`:
 
 - `ENCRYPTION_PASSWORD` Find this in 1Password
-- `GITHUB_TOKEN` Create a new personal OAuth token for the **slamdata-bot** account (credentials in 1Password)
+- `GITHUB_TOKEN` Create a new developer OAuth token for the **slamdata-bot** account (credentials in 1Password). This token should have **repo** permissions.
 - `GITHUB_ACCESS_TOKEN` Identical to `GITHUB_TOKEN`
 - `DISCORD_WEBHOOK_TOKENS` Go into Discord. Select the cog next to the **#travis** channel, then choose **Webhooks** and then **Edit**. This variable should be set to the value which *follows* the `https://discordapp.com/api/webhooks/` url prefix.
+
+You may need to use `travis encrypt -r` instead of `travis encrypt`.
 
 Once those secure sections have been created (preserve the labeling comments, please), run `git push upstream master` and the first Travis build should run!
 
