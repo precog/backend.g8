@@ -32,15 +32,12 @@ jobs:
     - stage: test
       script:
         - set -e
-        - \$SBT preBuild
         - \$SBT ++\$TRAVIS_SCALA_VERSION test
-        - \$SBT postBuild
 
     - stage: publish
       env:
       script:
         - set -e
-        - \$SBT preBuild
         - \$SBT transferPublishAndTagResources
         - TRAVIS_JOB_NUMBER=1 scripts/publishAndTag 'slamdata/$name;format="lower,camel"$'
 
