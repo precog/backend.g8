@@ -93,11 +93,7 @@ pgpSecretRing in Global := pgpPublicRing.value   // workaround for sbt/sbt-pgp#1
 
 lazy val publishSettings = commonPublishSettings ++ Seq(
   performMavenCentralSync := false,   // basically just ignores all the sonatype sync parts of things
-  $if(open_source.truthy)$
-  publishAsOSSProject := true,
-  $else$
-  publishAsOSSProject := false,
-  $endif$
+  publishAsOSSProject := $open_source$,
   organizationName := "SlamData Inc.",
   organizationHomepage := Some(url("http://slamdata.com")),
   homepage := Some(url("https://github.com/slamdata/$name;format="lower,hyphen"$")),
