@@ -19,7 +19,7 @@ $ git commit -S -m 'Initial commit'
 $ git remote add upstream git@github.com:slamdata/foo-bar.git
 # create repo on github (see below)
 $ git push upstream master
-$ travis enable -r slamdata/foo-bar.git
+$ travis enable -r slamdata/foo-bar
 ```
 
 Once this is done, the only remaining step is to [`travis encrypt`](https://docs.travis-ci.com/user/encryption-keys/#Usage) the following variables and add them to the `env.global` section of the `.travis.yml`:
