@@ -7,7 +7,7 @@ $ sbt new slamdata/backend.g8
 You will be prompted for the following:
 
 - `name [Your Project Name]:`
-- `open_source [no]:`
+- `open_source [false]:`
 
 Answer the questions. Let's assume the project name is `Foo Bar`. There will be a new project created in `./foo-bar/`:
 
