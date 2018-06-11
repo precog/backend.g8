@@ -39,7 +39,7 @@ jobs:
       script:
         - set -e
         - \$SBT transferPublishAndTagResources
-        - TRAVIS_JOB_NUMBER=1 scripts/publishAndTag 'slamdata/$name;format="lower,camel"$'
+        - TRAVIS_JOB_NUMBER=1 scripts/publishAndTag 'slamdata/$name;format="lower,hyphen"$'
 
       git:
         depth: false
