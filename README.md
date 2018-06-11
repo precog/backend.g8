@@ -15,7 +15,7 @@ Answer the questions. Let's assume the project name is `Foo Bar`. There will be 
 $ cd foo-bar
 $ git init
 $ git add .
-$ git commit -Sm 'Initial commit'
+$ git commit -S -m 'Initial commit'
 $ git remote add upstream git@github.com:slamdata/foo-bar.git
 # create repo on github (see below)
 $ git push upstream master
