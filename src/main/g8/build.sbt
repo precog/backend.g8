@@ -146,10 +146,6 @@ lazy val root = project
   .aggregate(core)
   .enablePlugins(AutomateHeaderPlugin)
 
-// common components
-
-/** SQL Parser module.
-  */
 lazy val core = project
   .in(file("core"))
   .settings(name := "$name;format="lower,hyphen"$")
@@ -160,4 +156,3 @@ lazy val core = project
      */)
   .settings(excludeTypelevelScalaLibrary)
   .enablePlugins(AutomateHeaderPlugin)
-
