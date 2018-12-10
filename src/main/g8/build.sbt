@@ -1,9 +1,5 @@
 import scala.collection.Seq
 
-performMavenCentralSync in ThisBuild := false   // basically just ignores all the sonatype sync parts of things
-
-publishAsOSSProject in ThisBuild := $open_source$
-
 homepage in ThisBuild := Some(url("https://github.com/slamdata/$name;format="lower,hyphen"$"))
 
 scmInfo in ThisBuild := Some(ScmInfo(
@@ -24,7 +20,6 @@ lazy val core = project
   .in(file("core"))
   .settings(name := "$name;format="lower,hyphen"$")
   .settings(
-    /*
-    libraryDependencies += ...
-     */)
+    performMavenCentralSync := false,
+    publishAsOSSProject := $open_source$)
   .enablePlugins(AutomateHeaderPlugin)
