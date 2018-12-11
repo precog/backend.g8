@@ -20,6 +20,8 @@ lazy val core = project
   .in(file("core"))
   .settings(name := "$name;format="lower,hyphen"$")
   .settings(
+    addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.2.4"))
+  .settings(
     performMavenCentralSync := false,
     publishAsOSSProject := $open_source$)
   .enablePlugins(AutomateHeaderPlugin)
