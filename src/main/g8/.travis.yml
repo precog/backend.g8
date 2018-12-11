@@ -2,17 +2,11 @@ language: scala
 scala: 2.12.6
 jdk: oraclejdk8
 
-stages:
-  - name: test
-  - name: publish
-    if: NOT type = pull_request
-
 cache:
   directories:
     - \$HOME/.ivy2/cache
     - \$HOME/.sbt
     - \$HOME/.coursier/cache
-    - '.hoarder-cache'
 
 env:
   global:
@@ -27,22 +21,16 @@ env:
     # DISCORD_WEBHOOK_TOKENS
     - secure: ...
 
-jobs:
-  include:
-    - stage: test
-      script:
-        - set -e
-        - \$SBT ++\$TRAVIS_SCALA_VERSION test
+script:
+    - set -e
 
-    - stage: publish
-      env:
-      script:
-        - set -e
-        - \$SBT transferPublishAndTagResources
-        - TRAVIS_JOB_NUMBER=1 scripts/publishAndTag 'slamdata/$name;format="lower,hyphen"$'
+    - \$SBT ++\$TRAVIS_SCALA_VERSION test
 
-      git:
-        depth: false
+    - |-
+      if [ $TRAVIS_PULL_REQUEST == "false" ] && [[ "$TRAVIS_BRANCH" =~ backport/v.*|master ]]; then
+        \$SBT transferPublishAndTagResources;
+        TRAVIS_JOB_NUMBER=1 scripts/publishAndTag 'slamdata/$name;format="lower,hyphen"$';
+      fi
 
 after_success:
   - scripts/discordTravisPost success https://discordapp.com/api/webhooks/\$DISCORD_WEBHOOK_TOKENS
