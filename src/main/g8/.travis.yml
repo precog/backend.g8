@@ -21,6 +21,12 @@ env:
     # DISCORD_WEBHOOK_TOKENS
     - secure: ...
 
+install:
+  - gem install octokit
+
+  - git config --global user.email "bot@slamdata.com"
+  - git config --global user.name "SlamData Bot"
+
 script:
     - set -e
 
@@ -33,6 +39,16 @@ script:
       fi
 
 after_success:
+  - |
+    if [ \$TRAVIS_PULL_REQUEST != "false" ] && [[ \$TRAVIS_PULL_REQUEST_BRANCH =~ 'version-bump' ]]; then
+      clone_dir=\$(mktemp -d "/tmp/slamdata-bump.XXXXXXXX")
+      git clone --depth 1 https://\$GITHUB_TOKEN@github.com/slamdata/devtools.git \$clone_dir
+
+      for t in "\$(scripts/listLabels | grep 'version: revision')"; do
+        \$clone_dir/bin/sdmerge \$TRAVIS_REPO_SLUG \$TRAVIS_PULL_REQUEST
+      done
+    fi
+
   - scripts/discordTravisPost success https://discordapp.com/api/webhooks/\$DISCORD_WEBHOOK_TOKENS
 
 after_failure:
