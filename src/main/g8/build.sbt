@@ -8,7 +8,7 @@ scmInfo in ThisBuild := Some(ScmInfo(
 
 // Include to also publish a project's tests
 lazy val publishTestsSettings = Seq(
-  publishArtifact in (Test, packageBin) := true)
+  Test / packageBin / publishArtifact := true)
 
 lazy val root = project
   .in(file("."))
