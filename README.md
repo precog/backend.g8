@@ -39,12 +39,14 @@ Once those secure sections have been created (preserve the labeling comments, pl
 
 ## Labels and Publication
 
-Publication will be automatically enabled for your repository. You are thus expected to use the `sdmerge` script and a pull request workflow. You will need to create the following four labels on your repository:
+Publication will be automatically enabled for your repository. You are thus expected to use the `sdmerge` script and a pull request workflow. You will need to create the following six labels on your repository:
 
-- **version: release**
-- **version: breaking**
-- **version: feature**
-- **version: revision**
+- **:skull_and_crossbones:** (`#000`)
+- **:stop_sign:** (`#fff`)
+- **version: release** (`#255184`)
+- **version: breaking** (`#e99695`)
+- **version: feature** (`#c2e0c6`)
+- **version: revision** (`#c5def5`)
 
 The **version: release** label is no longer necessary once you have passed version **1.0.0**.
 
