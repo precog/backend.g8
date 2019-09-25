@@ -19,7 +19,6 @@ $ git commit -S -m 'Initial commit'
 $ git remote add upstream git@github.com:slamdata/foo-bar.git
 # create repo on github (see below)
 $ git push upstream master
-$ travis enable -r slamdata/foo-bar
 ```
 
 Once this is done, the only remaining step is to [`travis encrypt`](https://docs.travis-ci.com/user/encryption-keys/#Usage) the following variables and add them to the `env.global` section of the `.travis.yml`:
@@ -29,7 +28,7 @@ Once this is done, the only remaining step is to [`travis encrypt`](https://docs
 - `GITHUB_ACCESS_TOKEN` Identical to `GITHUB_TOKEN`
 - `DISCORD_WEBHOOK_TOKENS` Go into Discord. Select the cog next to the **#travis** channel, then choose **Webhooks** and then **Edit**. This variable should be set to the value which *follows* the `https://discordapp.com/api/webhooks/` url prefix.
 
-Assuming Travis runs on `travis-ci.com` you need to use `travis encrypt --com`. Note that this currently not only holds for the private repositories under `slamdata`, but also its public repositories. Also good to supply `-r` explicitly, so the template for these commands looks like `travis encrypt --com -r slamdata/<repos-name> <VAR_NAME>="<secret>"`
+You will need to use `travis encrypt --com` for the very first `travis encrypt` invocation. After that point, Travis will save the upstream information and the flag will no longer be required. Also good to supply `-r` explicitly, so the template for these commands looks like `travis encrypt --com -r slamdata/<repos-name> <VAR_NAME>="<secret>"`
 
 Once those secure sections have been created (preserve the labeling comments, please), run `git push upstream master` and the first Travis build should run!
 
