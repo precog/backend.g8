@@ -6,6 +6,10 @@ on:
   push:
     branches: [master]
 
+env:
+  GITHUB_ACTOR: precog-bot
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 jobs:
   build:
     name: Build
