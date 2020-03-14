@@ -1,10 +1,12 @@
-import scala.collection.Seq
+ThisBuild / scalaVersion := "2.12.10"
 
-homepage in ThisBuild := Some(url("https://github.com/slamdata/$name;format="lower,hyphen"$"))
+ThisBuild / githubRepository := "$name;format="lower,hyphen"$"
 
-scmInfo in ThisBuild := Some(ScmInfo(
-  url("https://github.com/slamdata/$name;format="lower,hyphen"$"),
-  "scm:git@github.com:slamdata/$name;format="lower,hyphen"$.git"))
+ThisBuild / homepage := Some(url("https://github.com/precog/$name;format="lower,hyphen"$"))
+
+ThisBuild / scmInfo := Some(ScmInfo(
+  url("https://github.com/precog/$name;format="lower,hyphen"$"),
+  "scm:git@github.com:precog/$name;format="lower,hyphen"$.git"))
 
 // Include to also publish a project's tests
 lazy val publishTestsSettings = Seq(
@@ -14,7 +16,6 @@ lazy val root = project
   .in(file("."))
   .settings(noPublishSettings)
   .aggregate(core)
-  .enablePlugins(AutomateHeaderPlugin)
 
 lazy val core = project
   .in(file("core"))
@@ -22,4 +23,3 @@ lazy val core = project
   .settings(
     performMavenCentralSync := false,
     publishAsOSSProject := $open_source$)
-  .enablePlugins(AutomateHeaderPlugin)

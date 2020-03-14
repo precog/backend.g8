@@ -5,10 +5,10 @@
 
 SET ERROR_CODE=0
 
-SET LAUNCHER_PATH=%localappdata%/coursier-launcher
+SET LAUNCHER_PATH=%localappdata%\coursier-cli
 
 IF NOT EXIST "%LAUNCHER_PATH%" (
-  bitsadmin /transfer "DownloadCoursierLauncher" https://github.com/coursier/coursier/raw/master/coursier "%LAUNCHER_PATH%"
+  bitsadmin /transfer downloadCoursierCli https://git.io/coursier-cli "%LAUNCHER_PATH%"
 )
 
 SET CMD_LINE_ARGS=%*

@@ -1,7 +1,7 @@
-# backend g8 template [![Build Status](https://travis-ci.org/slamdata/backend.g8.svg?branch=master)](https://travis-ci.org/slamdata/backend.g8)
+# backend g8 template
 
 ```bash
-$ sbt new slamdata/backend.g8
+$ sbt new precog/backend.g8
 ```
 
 You will be prompted for the following:
@@ -16,37 +16,19 @@ $ cd foo-bar
 $ git init
 $ git add .
 $ git commit -S -m 'Initial commit'
-$ git remote add upstream git@github.com:slamdata/foo-bar.git
+$ git remote add upstream git@github.com:precog/foo-bar.git
 # create repo on github (see below)
 $ git push upstream master
 ```
 
-Once this is done, the only remaining step is to [`travis encrypt`](https://docs.travis-ci.com/user/encryption-keys/#Usage) the following variables and add them to the `env.global` section of the `.travis.yml`:
+Once this is done, the only remaining step is to add the GitHub Actions secret for `ENCRYPTION_PASSWORD`. You can find the value for this in 1Password under the **Build Encryption Password** entry. Please note that there are no typos in this value, and you should just copy it exactly verbatim.
 
-- `ENCRYPTION_PASSWORD` Find this in 1Password
-- `GITHUB_TOKEN` Create a new developer OAuth token for the **slamdata-bot** account (credentials in 1Password). This token should have **repo** permissions.
-- `GITHUB_ACCESS_TOKEN` Identical to `GITHUB_TOKEN`
-- `DISCORD_WEBHOOK_TOKENS` Go into Discord. Select the cog next to the **#travis** channel, then choose **Webhooks** and then **Edit**. This variable should be set to the value which *follows* the `https://discordapp.com/api/webhooks/` url prefix.
-
-You will need to use `travis encrypt --com` for the very first `travis encrypt` invocation. After that point, Travis will save the upstream information and the flag will no longer be required. Also good to supply `-r` explicitly, so the template for these commands looks like `travis encrypt --com -r slamdata/<repos-name> <VAR_NAME>="<secret>"`
-
-Once those secure sections have been created (preserve the labeling comments, please), run `git push upstream master` and the first Travis build should run!
+To add the secret, go to the **Secrets** section of your repository settings, click **Add a new secret**, enter `ENCRYPTION_PASSWORD` for the name and paste the value into the text box. Then click **Add secret** and you're all set! Run `git push upstream master` and the first Actions build should run!
 
 ## Repository Creation
 
-[Click here](https://github.com/organizations/slamdata/repositories/new). Put in the appropriate name and description and go to town. Go into **Settings** and disable **Wiki** and **Issues**. Once this is done, go to **Collaborators and Teams**, enter your password, and add the **Engineering** team as an **Admin** on the repository (publication will fail without this step!).
+[Click here](https://github.com/organizations/precog/repositories/new). Put in the appropriate name and description and go to town. Go into **Settings** and disable **Wiki** and **Issues**. Once this is done, go to **Manage Access**, enter your password, and add the **Engineering** team as an **Admin** on the repository (publication will fail without this step!).
 
 ## Labels and Publication
 
-Publication will be automatically enabled for your repository. You are thus expected to use the `sdmerge` script and a pull request workflow. You will need to create the following six labels on your repository:
-
-- **:skull_and_crossbones:** (`#000`)
-- **:stop_sign:** (`#fff`)
-- **version: release** (`#255184`)
-- **version: breaking** (`#e99695`)
-- **version: feature** (`#c2e0c6`)
-- **version: revision** (`#c5def5`)
-
-The **version: release** label is no longer necessary once you have passed version **1.0.0**.
-
-Once your first successful Travis build has completed, you *must* use the `sdmerge` script and pull requests! This is not optional.
+Unless you're writing an sbt plugin, published artifacts will be made available under the **Packages** section of your repository. After a short delay, they are also mirrored under the same section of the Precog organization. Once your first successful build has completed and the repository has published, you *must* use the `sdmerge` script and pull requests! This is not optional.
