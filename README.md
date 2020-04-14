@@ -13,6 +13,7 @@ Answer the questions. Let's assume the project name is `Foo Bar`. There will be 
 
 ```bash
 $ cd foo-bar
+$ ./sbt githubWorkflowGenerate
 $ git init
 $ git add .
 $ git commit -S -m 'Initial commit'
@@ -20,6 +21,8 @@ $ git remote add upstream git@github.com:precog/foo-bar.git
 # create repo on github (see below)
 $ git push upstream master
 ```
+
+Note the workflow generation stage. This is very important, otherwise your project will not build!
 
 Once this is done, the only remaining step is to add the GitHub Actions secret for `ENCRYPTION_PASSWORD`. You can find the value for this in 1Password under the **Build Encryption Password** entry. Please note that there are no typos in this value, and you should just copy it exactly verbatim.
 
