@@ -13,10 +13,12 @@ Answer the questions. Let's assume the project name is `Foo Bar`. There will be 
 
 ```bash
 $ cd foo-bar
-$ ./sbt githubWorkflowGenerate
 $ git init
 $ git add .
 $ git commit -S -m 'Initial commit'
+$ ./sbt githubWorkflowGenerate
+$ git add .
+$ git commit -S -a --amend -m 'Initial commit'
 $ git remote add upstream git@github.com:precog/foo-bar.git
 # create repo on github (see below)
 $ git push upstream master
